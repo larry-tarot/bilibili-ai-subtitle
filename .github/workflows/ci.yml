@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check shell syntax
+        run: bash -n scripts/bilibili_ai_subtitle.sh
+
+      - name: Check help command
+        run: bash scripts/bilibili_ai_subtitle.sh --help
+
+      - name: Check skill metadata
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          skill = Path("SKILL.md")
+          text = skill.read_text(encoding="utf-8")
+          if not text.startswith("---\n"):
+              raise SystemExit("SKILL.md must start with YAML frontmatter")
+          _, frontmatter, body = text.split("---", 2)
+          required = ("name:", "description:")
+          missing = [key for key in required if key not in frontmatter]
+          if missing:
+              raise SystemExit(f"Missing frontmatter keys: {missing}")
+          if "bilibili-ai-subtitle" not in frontmatter:
+              raise SystemExit("Skill name mismatch")
+          if not body.strip():
+              raise SystemExit("Skill body is empty")
+          print("Skill metadata looks valid")
+          PY

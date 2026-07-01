@@ -1,0 +1,25 @@
+.DS_Store
+*.log
+*.tmp
+*.srt
+*.vtt
+*.ass
+*.m4a
+*.mp3
+*.webm
+*.wav
+*.mp4
+*.mkv
+*.part
+*.ytdl
+cookies.txt
+*.cookies.txt
+.venv/
+venv/
+__pycache__/
+.pytest_cache/
+dist/
+build/
+output/
+outputs/
+Bilibili transcript/
