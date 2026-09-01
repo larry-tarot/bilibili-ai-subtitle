@@ -1,5 +1,7 @@
 # bilibili-ai-subtitle
 
+[![CI](https://github.com/larry-tarot/bilibili-ai-subtitle/actions/workflows/ci.yml/badge.svg)](https://github.com/larry-tarot/bilibili-ai-subtitle/actions/workflows/ci.yml)
+
 Bilibili AI subtitle downloader and transcript exporter.
 
 This project downloads Bilibili `ai-*` auto-subtitles, cleans them into readable text, and writes a structured `.txt` or `.md` transcript. It can also fall back to audio transcription with `faster-whisper` when a video has no matching AI subtitle track.
